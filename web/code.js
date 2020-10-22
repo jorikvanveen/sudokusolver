@@ -42,3 +42,10 @@ function moveX(direction) {
     cellCoords = cellY.toString() + cellX.toString();
     document.getElementById(cellCoords).focus();
 }
+
+function changeNumber(number) {
+    if (number > 9 || number < 1) {
+        document.activeElement.value = document.activeElement.value.charAt(0);
+
+    }
+}
