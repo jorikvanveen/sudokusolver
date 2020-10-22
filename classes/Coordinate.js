@@ -3,8 +3,16 @@ class Coordinate extends Array {
         const coords = super(x, y)
         this.coordsArray = coords
         
-        this.x = this.coordsArray[0]
-        this.y = this.coordsArray[1]
+        this._x = this.coordsArray[0]
+        this._y = this.coordsArray[1]
+    }
+    
+    get x() {
+        return this._x
+    }
+    
+    get y() {
+        return this._y
     }
 }
 

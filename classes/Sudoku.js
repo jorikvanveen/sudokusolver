@@ -46,6 +46,16 @@ class Sudoku {
         if (yCoord <= 9) return 2
     }
     
+    getSquare(x, y) {
+        // [1,2,3] + (y*3 - 1) = y
+        // [1,2,3] + (x*3 - 1) = x
+        
+        const xArray = [1,2,3].map(elem => {return elem + (this.coords.x * 3 - 1)})
+        const yArray = [1,2,3] * (this.coords.y * 3 - 1)
+        
+        
+    }
+    
     getSquareFromCoord(x, y) {
         const squareCoords = {
             x: this._getSquareColumnFromXCoord(x),

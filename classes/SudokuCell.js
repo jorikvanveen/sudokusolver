@@ -14,19 +14,30 @@ class SudokuCell {
         return this.row.y
     }
     
-    getSquareCoords() {
-        // [1,2,3] + (y*3 - 1) = y
-        // [1,2,3] + (x*3 - 1) = x
+    getSquare() {
+        let yCoord = 0
+        let xCoord = 0
         
-        // const xArray = [1,2,3] * (this.coords.x * 3 - 1)
-        // const yArray = [1,2,3] * (this.coords.y * 3 - 1)
+        if (this.coords.x <= 9) {
+            xCoord = 2
+        } else if (this.coords.x <= 6) {
+            xCoord = 1
+        } else {
+            this.coords = 0
+        }
         
-        let 
+        if (this.coords.y <= 9) {
+            yCoord = 2
+        } else if (this.coords.y <= 6) {
+            yCoord = 1
+        } else {
+            this.coords = 0
+        }
         
-        if (this.coords.x <= 9)
-        
-        return new SquareCoordinate()
+        return new SquareCoordinate(xCoord, yCoord)
     }
+    
+    
 }
 
 module.exports = SudokuCell
