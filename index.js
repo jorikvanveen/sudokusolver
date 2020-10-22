@@ -1,5 +1,6 @@
 const Sudoku = require("./classes/Sudoku")
 const FilesystemInterface = require("./classes/FilesystemInterface")
+const SquareCoordinate = require('./classes/SquareCoordinate')
 
 const filesystem = new FilesystemInterface()
 
@@ -8,9 +9,10 @@ async function main() {
     const allSudokuStrings = sudokuList.split("\n")
     const randomSudokuString = allSudokuStrings[Math.floor(Math.random() * allSudokuStrings.length)]
     const sudoku = new Sudoku(randomSudokuString)
-    
-    console.log(sudoku.rows)
-    console.log(sudoku.getColumn(4))
+
+    const square = sudoku.getSquareFromCoord(new SquareCoordinate(1, 0))
+
+    square.valueDump()
 }
 
 main()

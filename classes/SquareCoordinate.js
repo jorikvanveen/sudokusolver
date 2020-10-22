@@ -5,3 +5,5 @@ class SquareCoordinate extends Coordinate {
         super(x, y)
     }
 }
+
+module.exports = SquareCoordinate
