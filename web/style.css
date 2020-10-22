@@ -1,0 +1,54 @@
+table {
+    border-collapse: collapse;
+}
+
+td {
+    width: 40px;
+    height: 40px;
+    background-color: #eee;
+    margin: 0;
+    padding: 0;
+}
+
+td > input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    font-family: 'Open Sans', sans-serif;
+    font-size: medium;
+    text-align: center;
+}
+
+.sudokucell {
+    border: 1px solid #ddd;
+}
+
+td:first-child {
+    border-left:solid;
+}
+
+td:nth-child(3n) {
+    border-right:solid ;
+}
+
+tr:first-child {
+    border-top:solid;
+}
+
+tr:nth-child(3n) td {
+    border-bottom:solid ;
+}
+
+/* Haalt scroll weg */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+  }
