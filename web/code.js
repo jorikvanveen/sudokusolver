@@ -33,12 +33,30 @@ function checkKey(e) {
 
 function moveY(direction) {
     cellY = cellY + direction; //1 omhoog
+    if(cellY > 9) {
+        cellY = 1;
+    } 
+    if (cellY < 1) {
+        cellY = 9;
+    }
     cellCoords = cellY.toString() + cellX.toString(); //maakt het samen een string
     document.getElementById(cellCoords).focus(); //focused op het id met die coords
 }
 
 function moveX(direction) {
     cellX = cellX + direction;
+    if(cellX > 9) {
+        cellX = 1;
+    } 
+    if (cellX < 1) {
+        cellX = 9;
+    }
     cellCoords = cellY.toString() + cellX.toString();
     document.getElementById(cellCoords).focus();
+}
+
+function changeNumber(number) {
+    if (number > 9 || number < 1) {
+        document.activeElement.value = document.activeElement.value.charAt(0);
+    }
 }
