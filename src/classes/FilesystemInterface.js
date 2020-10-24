@@ -12,6 +12,18 @@ class FilesystemInterface {
             })
         })
     }
+
+    promiseBasedWrite(inputPath, textToWrite) {
+        return new Promise((resolve, reject) => {
+            fs.writeFile(inputPath, textToWrite, 'utf8', (err) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(err)
+                }
+            })
+        })
+    }
 }
 
 module.exports = FilesystemInterface

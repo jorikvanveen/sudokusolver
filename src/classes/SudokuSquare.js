@@ -14,6 +14,25 @@ class SudokuSquare {
         }
         console.log(finalArray)
     }
+
+    getAllCells() {
+        const cells = []
+
+        for (const row of this.rows)  {
+            for (const cell of row) {
+                cells.push(cell)
+            }
+        }
+
+        return cells
+    }
+
+    getAllValues() {
+        const cells = this.getAllCells()
+        return cells.map(cell => {
+            return cell.value
+        })
+    }
 }
 
 module.exports = SudokuSquare
