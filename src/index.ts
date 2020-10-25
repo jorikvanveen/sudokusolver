@@ -18,7 +18,6 @@ const allCellInputs = document.querySelectorAll(".sudoku-cell-input")
 
 let cellX: number;
 let cellY: number;
-let cellCoords: string;
 
 function clickedCell(event:Event) {
    const cell = event.target
