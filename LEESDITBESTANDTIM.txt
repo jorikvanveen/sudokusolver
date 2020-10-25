@@ -1,0 +1,11 @@
+Ik gebruik typescript, installeer dus typescript en parcel
+npm i -g typescript parcel
+npm i
+
+om de dev server te runnen:
+npm run dev
+
+Documentation wordt automatisch door vscode gegeven. Als je een sudoku maakt (const sudoku = new Sudoku("sudokustringhier"))
+dan kun je dus "sudoku." intypen om alle methods te krijgen die sudoku heeft
+
+ALLES STAAT IN /src
