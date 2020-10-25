@@ -6,10 +6,12 @@
     <title>Sudoku oplosser</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    <script src="code.js"></script>
+    <script defer src="code.js"></script>
 </head>
 <body>
     <table>
+        <button  id="knop" onclick="getSudokuString()">string</button>
+        <button  id="knop" onclick="getSudokuArray()">array</button>
         <tr class="sudokurow">
             <td class="sudokucell"><input id="11" onfocus="clickedCell(this.id)" oninput="changeNumber(this.value)"type="number"></td>
             <td class="sudokucell"><input id="12" onfocus="clickedCell(this.id)" oninput="changeNumber(this.value)"type="number"></td>
@@ -110,5 +112,6 @@
             <td class="sudokucell"><input id="99" onfocus="clickedCell(this.id)" oninput="changeNumber(this.value)"type="number"></td>
         </tr>
     </table>
+    <p id="output"></p>
 </body>
 </html>

@@ -42,6 +42,11 @@ tr:nth-child(3n) td {
     border-bottom:solid ;
 }
 
+input:focus {
+    background-color: rgba(240, 240, 240);
+    caret-color: transparent;
+}
+
 /* Haalt scroll weg */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

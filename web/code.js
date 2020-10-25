@@ -58,5 +58,24 @@ function moveX(direction) {
 function changeNumber(number) {
     if (number > 9 || number < 1) {
         document.activeElement.value = document.activeElement.value.charAt(0);
+    } 
+    if (number == 0) {
+        document.activeElement.value = '';
     }
+}
+
+function getSudokuString() {
+    console.log('e');
+    document.getElementById('knop').blur();
+    var cellsA = document.querySelectorAll('td > input');
+    var sudokuString = '';
+
+    for(const cell of cellsA) {
+        if (cell.value == '') {
+            sudokuString += "0";
+            continue
+        }
+        sudokuString += cell.value;
+    }
+    return sudokuString;
 }
