@@ -4,7 +4,7 @@
         "noImplicitAny": true,
         "watch": true,
         "outDir": "../build",
-        "lib": ["DOM"],
+        "lib": ["DOM", "ES2019.Array"],
         "baseUrl": "./src",
         "paths": {
             "~*": ["./*"]

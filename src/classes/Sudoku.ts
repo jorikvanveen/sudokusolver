@@ -1,3 +1,4 @@
+import Coordinate from "./Coordinate"
 import SudokuCell from "./SudokuCell"
 
 export default class Sudoku {
@@ -86,6 +87,18 @@ export default class Sudoku {
         return this.getCellFromCoord(xCoord, yCoord)
     }
 
+    public toString() {
+        let finalString = ""
+
+        for (const row of this.rows) {
+            for (const cell of row) {
+                finalString += cell.getValue()
+            }
+        }
+
+        return finalString
+    }
+
     private getFirstEmptyCell() {
         let index = 0
 
@@ -113,6 +126,91 @@ export default class Sudoku {
         }
 
         console.log(finalString)
+    }
+
+    public isSolved() {
+        return !this.rows.flat().find(cell => {
+            return cell.getValue() === 0
+        })
+    }
+
+    public solveLoneSingles() {
+        // Gets all cells that have only one possibility and fills in that possibility, repeats until all cells have more than 1 possibility or the puzzle is solved
+        let solvedAllLoneSingles = false
+        let solvedAnyLoneSingle = false
+
+        while (!solvedAllLoneSingles) {
+            let solvedAtLeastOne = false
+
+            for (const row of this.rows) {
+                for (const cell of row) {
+                    if (cell.isClue()) continue 
+                    const candidates = cell.getAllCandidates()
+
+                    if (candidates.length === 1) {
+                        cell.setValue(candidates[0])
+                        cell.makeImmutable()
+                        solvedAtLeastOne = true
+                        solvedAnyLoneSingle = true
+                    }
+                }
+            }
+
+            if (!solvedAtLeastOne) {
+                solvedAllLoneSingles = true
+            }
+        }
+
+        return solvedAnyLoneSingle
+    }
+
+    public solveHiddenSingles() {
+        let solvedAllHiddenSingles = false
+        let solvedAnyHiddenSingle = false
+
+        while (!solvedAllHiddenSingles) {
+            let solvedAtLeastOne = false
+
+            for (const row of this.rows) {
+                cellIteration: for (const cell of row) {
+                    if (cell.isClue()) continue cellIteration
+                    const ownCandidates = cell.getAllCandidates()
+                    for (const ownCandidate of ownCandidates) {
+                        const row = cell.getRow()
+                        const col = cell.getColumn()
+                        const subgrid = cell.getSubgrid()
+
+                        const candidatesFromCell = (inputCell:SudokuCell) => {
+                            if (!inputCell.isClue() && inputCell !== cell) {
+                                return inputCell.getAllCandidates()
+                            }
+                        }
+
+                        const rowCandidates = row.map(candidatesFromCell).flat()
+                        const colCandidates = col.map(candidatesFromCell).flat()
+                        const subgridCandidates = subgrid.map(candidatesFromCell).flat()
+
+                        const rowHasCandidate = rowCandidates.includes(ownCandidate)
+                        const colHasCandidate = colCandidates.includes(ownCandidate)
+                        const subgridHasCandidate = subgridCandidates.includes(ownCandidate)
+
+                        if (!rowHasCandidate || !colHasCandidate || !subgridHasCandidate) {
+                            cell.setValue(ownCandidate)
+                            cell.makeImmutable()
+                            console.log("Solved hidden single")
+                            solvedAtLeastOne = true
+                            solvedAnyHiddenSingle = true
+                        }
+                    }
+                }
+            }
+
+            if (!solvedAtLeastOne) {
+                solvedAllHiddenSingles = true
+            }
+        }
+
+        return solvedAnyHiddenSingle
     }
 
     public solveByBacktracking() {
@@ -162,5 +260,20 @@ export default class Sudoku {
         }
 
         console.log("solved")
+    }
+
+    public solve() {
+        while (true) {
+            const foundLoneSingle = this.solveLoneSingles()
+            const foundHiddenSingle = this.solveHiddenSingles()
+
+            if (!foundLoneSingle && !foundHiddenSingle) {
+                break
+            }
+        }
+
+        if (!this.isSolved()) {
+            this.solveByBacktracking()
+        }
     }
 }

@@ -102,8 +102,7 @@ function onKeyDown(event: KeyboardEvent) {
 
 document.addEventListener("keydown", onKeyDown)
 
-document.getElementById('knop').addEventListener("click", getSudokuString)
-
+// 000000900090083450040500280000265300000000000006714000074002030083150040002000000
 function getSudokuString() {
    var cellsA = document.querySelectorAll('td > input');
    var sudokuString = '';
@@ -120,3 +119,21 @@ function getSudokuString() {
    console.log(sudokuString)
    return sudokuString;
 }
+
+document.getElementById('knop').addEventListener("click", () => {
+   // const sudoku1 = new Sudoku(getSudokuString())
+   // const sudoku2 = new Sudoku(getSudokuString())
+   
+   const sudoku = new Sudoku(getSudokuString())
+   // const cell = sudoku.getCellFromCoord(2, 2)
+   // console.log(cell.getAllCandidates().includes(9))
+   sudoku.display()
+   sudoku.solve()
+   sudoku.display()
+
+   // sudoku.display()
+   // sudoku.solveByBacktracking()
+
+   // console.log(sudoku.toString())
+   // sudoku.getRow(1)
+})
