@@ -43,6 +43,10 @@ function changeInput(event:InputEvent) {
    }
 
    var output = document.getElementById('output');
+
+   const inputSudoku = new Sudoku(getSudokuString());
+   
+   alert(inputSudoku.getRow(cellY - 1));
 }
 
 function lostFocus(event:Event) {
