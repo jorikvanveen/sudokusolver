@@ -4,5 +4,6 @@
         "noImplicitAny": true,
         "watch": true,
         "outDir": "../build",
+        "lib": ["DOM"]
     }
 }

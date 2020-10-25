@@ -3,6 +3,7 @@ var cellY;
 var cellCoords;
 
 function clickedCell(cell) {
+    console.log(cell.constructor)
     cellX = parseInt(cell.charAt(1)); //x coord van cell, oftewel de 2e character
     cellY = parseInt(cell.charAt(0)); // y coord
 }
