@@ -16,6 +16,9 @@ main()
 
 const allCellInputs = document.querySelectorAll(".sudoku-cell-input")
 
+let cellX: number;
+let cellY: number;
+
 function clickedCell(event:Event) {
    const cell = event.target
    if (!(cell instanceof HTMLInputElement)) return
