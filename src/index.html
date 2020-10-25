@@ -11,8 +11,10 @@
 </head>
 <body>
     <table>
+        <button  id="knop">string</button>
+        <button  id="knop2" onclick="getSudokuArray()">array</button>
         <tr class="sudokurow">
-            <td class="sudokucell"><input id="11" onfocus="clickedCell(this.id)" oninput="changeNumber(this.value)"type="number"></td>
+            <td class="sudokucell"><input id="11" class="sudoku-cell-input" onfocus="clickedCell(this.id)" oninput="changeNumber(this.value)"type="number"></td>
             <td class="sudokucell"><input id="12" class="sudoku-cell-input" type="number"></td>
             <td class="sudokucell"><input id="13" class="sudoku-cell-input" type="number"></td>
             <td class="sudokucell"><input id="14" class="sudoku-cell-input" type="number"></td>
@@ -111,5 +113,6 @@
             <td class="sudokucell"><input id="99" class="sudoku-cell-input" type="number"></td>
         </tr>
     </table>
+    <p id="output"></p>
 </body>
 </html>
