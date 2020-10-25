@@ -147,31 +147,17 @@ export default class Sudoku {
 
 
         while (!foundSolution) {
-            // console.log(currentCell.getIndex(), currentCell.getValue())
             const newValue = currentCell.incrementValue()
             const isNewValueValid = currentCell.testCurrentValue()
 
             if (newValue > 9) {
                 previousCell()
-                // this.display()
                 continue
             }
 
             if (isNewValueValid && newValue !== 0) {
                 nextCell()
             }
-
-            // if (currentCell.testCurrentValue() && currentCell.getValue() < 10) {
-            //     // console.log("next", currentCell.testCurrentValue(), currentCell.getValue(), currentCell.getIndex())
-            //     nextCell()
-            // } else if (!currentCell.testCurrentValue() && currentCell.getValue() === 9 || currentCell.getValue() > 9) {
-            //     // console.log("previous", currentCell.testCurrentValue(), currentCell.getValue(), currentCell.getIndex())
-            //     currentCell.setValue(0)
-            //     previousCell()
-            // }
-
-            // this.display()
-            // console.log(currentCell.getIndex())
             
         }
 

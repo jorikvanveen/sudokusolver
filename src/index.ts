@@ -8,7 +8,7 @@ function main() {
    // Lost hele sudoku op, heeft nog geen error handling lmao
    sudoku.solveByBacktracking()
 
-   // Dumpt de hele sudoku in de console
+   // Dumpt de hele sudoku in de console 
    sudoku.display()
 }
 

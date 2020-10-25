@@ -1,4 +1,3 @@
-import { clearLine } from "readline";
 import Coordinate from "./Coordinate";
 import Sudoku from "./Sudoku";
 
