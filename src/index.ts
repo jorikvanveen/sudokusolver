@@ -33,7 +33,6 @@ function clickedCell(event:Event) {
 function changeInput(event:InputEvent) {
    const cell = event.target
 
-   console.log(event.constructor.name)
    if (!(cell instanceof HTMLInputElement)) return
    const number = parseInt(event.data)
 
@@ -43,6 +42,7 @@ function changeInput(event:InputEvent) {
       cell.value = number.toString()
    }
 
+   var output = document.getElementById('output');
 }
 
 function lostFocus(event:Event) {
@@ -102,3 +102,22 @@ function onKeyDown(event:KeyboardEvent) {
 }
 
 document.addEventListener("keydown", onKeyDown)
+
+document.getElementById('knop').addEventListener("click", getSudokuString)
+
+function getSudokuString() {
+    var cellsA = document.querySelectorAll('td > input');
+    var sudokuString = '';
+
+    cellsA.forEach(cell => {
+        if (!(cell instanceof HTMLInputElement)) return
+        if (cell.value == '') {
+            sudokuString += "0";
+            return
+        }
+        sudokuString += cell.value;
+    })
+
+    return sudokuString;
+    document.getElementById('output').innerHTML = sudokuString;
+}
