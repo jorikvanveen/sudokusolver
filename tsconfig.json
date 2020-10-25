@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "ES5",
+        "noImplicitAny": true,
+        "watch": true,
+        "outDir": "../build",
+        "lib": ["DOM", "ES2019.Array"],
+        "baseUrl": "./src",
+        "paths": {
+            "~*": ["./*"]
+        },
+    },
+    "include": ["src/**/*"]
+}

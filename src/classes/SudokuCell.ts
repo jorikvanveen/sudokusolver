@@ -1,4 +1,3 @@
-import { clearLine } from "readline";
 import Coordinate from "./Coordinate";
 import Sudoku from "./Sudoku";
 
@@ -119,7 +118,25 @@ export default class SudokuCell {
         return this.testValue()
     }
 
+    public getAllCandidates() {
+        const candidates:number[] = []
+
+        for (let i = 1; i <= 9; i++) {
+            const isValidCandidate = this.testValue(i)
+            if (isValidCandidate) {
+                if (candidates.includes(i)) continue
+                candidates.push(i)
+            }
+        }
+
+        return candidates
+    }
+
     public getIndex() {
         return this.coords.y * 9 + this.coords.x
+    }
+
+    public makeImmutable() {
+        this.clue = true
     }
 }

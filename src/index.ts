@@ -8,7 +8,7 @@ function main() {
    // Lost hele sudoku op, heeft nog geen error handling lmao
    sudoku.solveByBacktracking()
 
-   // Dumpt de hele sudoku in de console
+   // Dumpt de hele sudoku in de console 
    sudoku.display()
 }
 
@@ -18,9 +18,8 @@ const allCellInputs = document.querySelectorAll(".sudoku-cell-input")
 
 let cellX: number;
 let cellY: number;
-let cellCoords: string;
 
-function clickedCell(event:Event) {
+function clickedCell(event: Event) {
    const cell = event.target
    if (!(cell instanceof HTMLInputElement)) return
 
@@ -30,7 +29,7 @@ function clickedCell(event:Event) {
    cellY = parseInt(cell.value.charAt(0)); // y coord
 }
 
-function changeInput(event:InputEvent) {
+function changeInput(event: InputEvent) {
    const cell = event.target
 
    if (!(cell instanceof HTMLInputElement)) return
@@ -49,7 +48,7 @@ function changeInput(event:InputEvent) {
    alert(inputSudoku.getRow(cellY - 1));
 }
 
-function lostFocus(event:Event) {
+function lostFocus(event: Event) {
    const cell = event.target
    if (!(cell instanceof HTMLInputElement)) return
    cell.style.backgroundColor = "rgb(255, 255, 255)"
@@ -61,7 +60,7 @@ allCellInputs.forEach(cellInput => {
    cellInput.addEventListener("blur", lostFocus)
 })
 
-function moveFocus(axis:axis, moveDirection:number) {
+function moveFocus(axis: axis, moveDirection: number) {
    const currentlyFocusedElement = document.activeElement
    if (currentlyFocusedElement.className !== "sudoku-cell-input") return
    if (!(currentlyFocusedElement instanceof HTMLInputElement)) return
@@ -85,7 +84,7 @@ function moveFocus(axis:axis, moveDirection:number) {
    }
 }
 
-function onKeyDown(event:KeyboardEvent) {
+function onKeyDown(event: KeyboardEvent) {
    const key = event.key
    switch (key) {
       case "ArrowLeft":
@@ -107,21 +106,38 @@ function onKeyDown(event:KeyboardEvent) {
 
 document.addEventListener("keydown", onKeyDown)
 
-document.getElementById('knop').addEventListener("click", getSudokuString)
-
+// 000000900090083450040500280000265300000000000006714000074002030083150040002000000
 function getSudokuString() {
-    var cellsA = document.querySelectorAll('td > input');
-    var sudokuString = '';
+   var cellsA = document.querySelectorAll('td > input');
+   var sudokuString = '';
 
-    cellsA.forEach(cell => {
-        if (!(cell instanceof HTMLInputElement)) return
-        if (cell.value == '') {
-            sudokuString += "0";
-            return
-        }
-        sudokuString += cell.value;
-    })
+   cellsA.forEach(cell => {
+      if (!(cell instanceof HTMLInputElement)) return
+      if (cell.value == '') {
+         sudokuString += "0";
+         return
+      }
+      sudokuString += cell.value;
+   })
 
-    return sudokuString;
-    document.getElementById('output').innerHTML = sudokuString;
+   console.log(sudokuString)
+   return sudokuString;
 }
+
+document.getElementById('knop').addEventListener("click", () => {
+   // const sudoku1 = new Sudoku(getSudokuString())
+   // const sudoku2 = new Sudoku(getSudokuString())
+   
+   const sudoku = new Sudoku(getSudokuString())
+   // const cell = sudoku.getCellFromCoord(2, 2)
+   // console.log(cell.getAllCandidates().includes(9))
+   sudoku.display()
+   sudoku.solve()
+   sudoku.display()
+
+   // sudoku.display()
+   // sudoku.solveByBacktracking()
+
+   // console.log(sudoku.toString())
+   // sudoku.getRow(1)
+})
