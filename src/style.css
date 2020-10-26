@@ -20,25 +20,27 @@ td > input {
     font-family: 'Open Sans', sans-serif;
     font-size: medium;
     text-align: center;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0,0,0);
 }
 
-.sudokucell {
+.sudokucell, #tableOutput td {
     border: 1px solid #ddd;
 }
 
-td:first-child {
+td:first-child, #tableOutput td:first-child {
     border-left:solid;
 }
 
-td:nth-child(3n) {
+td:nth-child(3n), #tableOutput td:nth-child(3n) {
     border-right:solid ;
 }
 
-tr:first-child {
+tr:first-child, #tableOutput tr:first-child {
     border-top:solid;
 }
 
-tr:nth-child(3n) td {
+tr:nth-child(3n) td, #tableOutput tr:nth-child(3n) {
     border-bottom:solid ;
 }
 

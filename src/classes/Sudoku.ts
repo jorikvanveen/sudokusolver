@@ -128,6 +128,22 @@ export default class Sudoku {
         console.log(finalString)
     }
 
+    public toHTMLTable() {
+        let table = "<table>"
+
+        for (const row of this.rows) {
+            table += "<tr>"
+            for (const cell of row) {
+                table += `<td><input disabled value="${cell.getValue()}"></td>`
+            }
+            table += "</tr>"
+        }
+
+        table += "</table>"
+
+        return table
+    }
+
     public isSolved() {
         return !this.rows.flat().find(cell => {
             return cell.getValue() === 0
@@ -263,6 +279,8 @@ export default class Sudoku {
     }
 
     public solve() {
+        const timeMeasureStart = performance.now()
+
         while (true) {
             const foundLoneSingle = this.solveLoneSingles()
             const foundHiddenSingle = this.solveHiddenSingles()
@@ -275,5 +293,9 @@ export default class Sudoku {
         if (!this.isSolved()) {
             this.solveByBacktracking()
         }
+
+        const timeMeasureEnd = performance.now()
+        const time = timeMeasureEnd - timeMeasureStart
+        console.log(`Solved in ${time}ms`)
     }
 }

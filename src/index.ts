@@ -45,7 +45,7 @@ function changeInput(event: InputEvent) {
 
    const inputSudoku = new Sudoku(getSudokuString());
    
-   alert(inputSudoku.getRow(cellY - 1));
+   // alert(inputSudoku.getRow(cellY - 1));
 }
 
 function lostFocus(event: Event) {
@@ -108,7 +108,7 @@ document.addEventListener("keydown", onKeyDown)
 
 // 000000900090083450040500280000265300000000000006714000074002030083150040002000000
 function getSudokuString() {
-   var cellsA = document.querySelectorAll('td > input');
+   var cellsA = document.querySelectorAll('#inputSudoku td > input');
    var sudokuString = '';
 
    cellsA.forEach(cell => {
@@ -134,6 +134,8 @@ document.getElementById('knop').addEventListener("click", () => {
    sudoku.display()
    sudoku.solve()
    sudoku.display()
+
+   document.getElementById("tableOutput").innerHTML = sudoku.toHTMLTable()
 
    // sudoku.display()
    // sudoku.solveByBacktracking()
