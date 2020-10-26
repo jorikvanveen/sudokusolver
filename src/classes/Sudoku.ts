@@ -291,6 +291,8 @@ export default class Sudoku {
         }
 
         if (!this.isSolved()) {
+            console.log("Started backtracking")
+            this.display()
             this.solveByBacktracking()
         }
 
