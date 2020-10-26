@@ -104,12 +104,7 @@ export default class SudokuCell {
 		const foundInCol = typeof col.find(mapper) !== 'undefined'
 		const foundInSubgrid = typeof subgrid.find(mapper) !== 'undefined'
 
-		// console.log(valueToTest, foundInRow, foundInCol, foundInSubgrid)
-		// console.log(row, col, subgrid)
-
 		const isValidCandidate = !foundInRow && !foundInCol && !foundInSubgrid
-
-		// console.log(this.getIndex(), this.coords, valueToTest, this.value, isValidCandidate)
 
 		return isValidCandidate
 	}
@@ -119,6 +114,7 @@ export default class SudokuCell {
 	}
 
 	public getAllCandidates () {
+		// Gets all possible values for this cell
 		const candidates:number[] = []
 
 		for (let i = 1; i <= 9; i++) {
