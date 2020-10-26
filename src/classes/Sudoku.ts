@@ -1,15 +1,18 @@
 import SudokuCell from './SudokuCell'
 
 export default class Sudoku {
-	private rows: SudokuCell[][]
+	private rows: SudokuCell[][] // Array of arrays of SudokuCells
 
 	constructor (sudokuData: string) {
+		// Input example: sudokuData = "500003000060002401080100095008007600240000900073416002090070360001050208007340000"
 		if (sudokuData.length !== 81) {
 			throw new Error('Invalid sudoku string')
 		}
 
 		const rows = []
+		// Populate rows array with arrays of sudokucells
 		for (let y = 0; y < 9; y++) {
+			// y is the coordinate of a row
 			const row: SudokuCell[] = []
 
 			for (let x = 0; x < 9; x++) {
@@ -52,6 +55,7 @@ export default class Sudoku {
 	}
 
 	public getAllRowValues () {
+		// Gets all the rows, not in SudokuCell[][] form, but in number[][] form
 		return this.getAllRows().map(row => {
 			return row.map(cell => {
 				return cell.getValue()
@@ -60,6 +64,7 @@ export default class Sudoku {
 	}
 
 	public getAllColumnValues () {
+		// Gets all columns in number[][] form
 		return this.getAllColumns().map(col => {
 			return col.map(cell => {
 				return cell.getValue()
@@ -76,10 +81,12 @@ export default class Sudoku {
 	}
 
 	public getCellFromCoord (x: number, y: number) {
-		return this.rows[y][x]
+		// Gets a cell from the coordinate x, y
+		return this.rows[y][x] // [y][x] because the rows are stored, and a row is a y coord
 	}
 
 	public getCellFromIndex (index: number) {
+		// An index is a number between 0 and 80, rowCoord = floor(index / 9), colCoord = index - rowCoord * 9
 		const yCoord = Math.floor(index / 9)
 		const xCoord = index - yCoord * 9
 
@@ -87,6 +94,7 @@ export default class Sudoku {
 	}
 
 	public toString () {
+		// Parses a Sudoku as a sudoku string which can be used to construct a new Sudoku object
 		let finalString = ''
 
 		for (const row of this.rows) {
@@ -99,6 +107,7 @@ export default class Sudoku {
 	}
 
 	private getFirstEmptyCell () {
+		// Gets first cell of a sudoku that wasn't already given from the beginning
 		let index = 0
 
 		while (true) {
@@ -113,6 +122,7 @@ export default class Sudoku {
 	}
 
 	public display () {
+		// Displays sudoku in the console
 		const rows = this.rows
 		let finalString = ''
 
@@ -128,6 +138,7 @@ export default class Sudoku {
 	}
 
 	public toHTMLTable () {
+		// Converts sudoku to a html table string
 		let table = '<table>'
 
 		for (const row of this.rows) {
@@ -144,6 +155,7 @@ export default class Sudoku {
 	}
 
 	public isSolved () {
+		// Iterates through every cell and checks if any values remain empty
 		return !this.rows.flat().find(cell => {
 			return cell.getValue() === 0
 		})
@@ -160,11 +172,12 @@ export default class Sudoku {
 			for (const row of this.rows) {
 				for (const cell of row) {
 					if (cell.isClue()) continue
+					// A candidate is a possible value that can be entered in a certain cell
 					const candidates = cell.getAllCandidates()
 
 					if (candidates.length === 1) {
-						cell.setValue(candidates[0])
-						cell.makeImmutable()
+						cell.setValue(candidates[0]) // If there is only 1 candidate, that candidate will always be the first one in the array
+						cell.makeImmutable() // Make sure this cell isn't overwritten if we have to backtrack later
 						solvedAtLeastOne = true
 						solvedAnyLoneSingle = true
 					}
@@ -232,6 +245,7 @@ export default class Sudoku {
 		let foundSolution = false
 		let currentCell = this.getFirstEmptyCell()
 
+		// TODO: make nextCell and previousCell methods of SudokuCell instead of defining them here
 		const nextCell = () => {
 			while (true) {
 				if (currentCell.getIndex() === 80) {
@@ -280,6 +294,7 @@ export default class Sudoku {
 	public solve () {
 		const timeMeasureStart = performance.now()
 
+		// Use hidden singles / lone singles method until we get stuck
 		while (true) {
 			const foundLoneSingle = this.solveLoneSingles()
 			const foundHiddenSingle = this.solveHiddenSingles()
@@ -289,6 +304,7 @@ export default class Sudoku {
 			}
 		}
 
+		// Use backtracking if the puzzle hasn't been solved yet
 		if (!this.isSolved()) {
 			console.log('Started backtracking')
 			this.display()
