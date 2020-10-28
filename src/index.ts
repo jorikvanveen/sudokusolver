@@ -24,9 +24,6 @@ function clickedCell (event: Event) {
 	if (!(cell instanceof HTMLInputElement)) return
 
 	cell.style.backgroundColor = 'rgba(0, 0, 0, 0.07)'
-
-//   cellX = parseInt(cell.value.charAt(1)) // x coord van cell, oftewel de 2e character
-//   cellY = parseInt(cell.value.charAt(0)) // y coord
 }
 
 function changeInput (event: InputEvent) {
@@ -40,8 +37,6 @@ function changeInput (event: InputEvent) {
 	} else {
 		cell.value = number.toString()
 	}
-
-	// alert(inputSudoku.getRow(cellY - 1));
 }
 
 function lostFocus (event: Event) {
@@ -62,7 +57,14 @@ function moveFocus (axis: axis, moveDirection: number) {
 	if (!(currentlyFocusedElement instanceof HTMLInputElement)) return
 
 	if (axis === 'x') {
-		const newCoordinate = parseInt(currentlyFocusedElement.id.charAt(0)) + moveDirection
+		let newCoordinate = parseInt(currentlyFocusedElement.id.charAt(0)) + moveDirection
+
+		if (newCoordinate > 9) {
+			newCoordinate = 1 // als je hoger dan 9 gaat springt hij terug
+		} else if (newCoordinate < 1) {
+			newCoordinate = 9 // andersom
+		}
+
 		const idToFocus = newCoordinate.toString() + currentlyFocusedElement.id.charAt(1)
 		const elemToFocus = document.getElementById(idToFocus)
 
@@ -70,7 +72,14 @@ function moveFocus (axis: axis, moveDirection: number) {
 			elemToFocus.focus()
 		}
 	} else if (axis === 'y') {
-		const newCoordinate = parseInt(currentlyFocusedElement.id.charAt(1)) + moveDirection
+		let newCoordinate = parseInt(currentlyFocusedElement.id.charAt(1)) + moveDirection
+
+		if (newCoordinate > 9) {
+			newCoordinate = 1 // als je hoger dan 9 gaat springt hij terug
+		} else if (newCoordinate < 1) {
+			newCoordinate = 9 // andersom
+		}
+
 		const idToFocus = currentlyFocusedElement.id.charAt(0) + newCoordinate.toString()
 		const elemToFocus = document.getElementById(idToFocus)
 
